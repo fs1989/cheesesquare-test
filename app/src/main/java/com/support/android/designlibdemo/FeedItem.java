@@ -9,11 +9,18 @@ public class FeedItem extends BmobObject {
 
     Integer id;
     Integer likes;
-    String name;
+    String title;
+    String brand;
+    String price;
     String desc;
-    String avarar;
+    String name;
+    String avatar;
     String image;
     String time;
+
+    public FeedItem(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -31,12 +38,12 @@ public class FeedItem extends BmobObject {
         this.likes = likes;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDesc() {
@@ -47,12 +54,20 @@ public class FeedItem extends BmobObject {
         this.desc = desc;
     }
 
-    public String getAvatar() {
-        return avarar;
+    public String getName() {
+        return name;
     }
 
-    public void setAvator(String avarar) {
-        this.avarar = avarar;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getImage() {
@@ -69,5 +84,21 @@ public class FeedItem extends BmobObject {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

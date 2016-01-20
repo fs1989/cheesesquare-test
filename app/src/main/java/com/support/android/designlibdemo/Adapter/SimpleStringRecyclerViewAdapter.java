@@ -2,6 +2,7 @@ package com.support.android.designlibdemo.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,11 +13,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.support.android.designlibdemo.CheeseDetailActivity;
-import com.support.android.designlibdemo.Cheeses;
 import com.support.android.designlibdemo.FeedItem;
 import com.support.android.designlibdemo.R;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Dan on 2016-01-15.
@@ -27,33 +29,6 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
     private int mBackground;
     private List<FeedItem> mdata;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-
-        public Integer id;
-        public final TextView likes;
-        public final TextView name;
-        public final TextView desc;
-        public final TextView time;
-        public final ImageView avatar;
-        public final ImageView image;
-
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-
-            likes = (TextView) view.findViewById(R.id.likes);
-            name = (TextView) view.findViewById(R.id.name);
-            desc = (TextView) view.findViewById(R.id.desc);
-            time = (TextView) view.findViewById(R.id.time);
-            avatar = (ImageView) view.findViewById(R.id.avatar);
-            image = (ImageView) view.findViewById(R.id.image);
-        }
-
-    }
-
-
     public SimpleStringRecyclerViewAdapter(Context context, List<FeedItem> items) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
@@ -62,34 +37,39 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View itemLayout  = LayoutInflater.from(viewGroup.getContext())
+        View itemLayout = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_item, viewGroup, false);
-        itemLayout .setBackgroundResource(mBackground);
+        itemLayout.setBackgroundResource(mBackground);
         return new ViewHolder(itemLayout);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        ViewHolder viewHolder = new ViewHolder(holder.mView);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final ViewHolder viewHolder = new ViewHolder(holder.mView);
 
+        holder.objectId = mdata.get(position).getObjectId();
         holder.id = mdata.get(position).getId();
 
         viewHolder.likes.setText(mdata.get(position).getLikes().toString());
         viewHolder.name.setText(mdata.get(position).getName().toString());
         viewHolder.desc.setText(mdata.get(position).getDesc().toString());
 
-//        holder.mTextView.setText(mdata.get(position).getName());
+        String image = mdata.get(position).getImage();
+        String avatar = mdata.get(position).getAvatar();
+        Glide.with(holder.avatar.getContext()).load(avatar).into(viewHolder.avatar);
+        Glide.with(holder.image.getContext()).load(image).crossFade().into(viewHolder.image);
 
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context, CheeseDetailActivity.class);
-//                intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.mBoundString);
-//
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, CheeseDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("feedItem", mdata.get(position));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
 //        Glide.with(holder.mImageView.getContext())
 //                .load(Cheeses.getRandomCheeseDrawable())
@@ -101,5 +81,31 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
     public int getItemCount() {
         System.out.println("mdata size: " + mdata.size());
         return mdata.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView likes;
+        public final TextView name;
+        public final TextView desc;
+        public final TextView time;
+        public final CircleImageView avatar;
+        public final ImageView image;
+        public String objectId;
+        public Integer id;
+
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+
+            likes = (TextView) view.findViewById(R.id.likes);
+            name = (TextView) view.findViewById(R.id.name);
+            desc = (TextView) view.findViewById(R.id.desc);
+            time = (TextView) view.findViewById(R.id.time);
+            avatar = (CircleImageView) view.findViewById(R.id.avatar);
+            image = (ImageView) view.findViewById(R.id.image);
+        }
+
     }
 }

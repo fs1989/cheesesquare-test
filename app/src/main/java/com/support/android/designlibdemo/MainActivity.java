@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new CheeseListFragment(), "Category 1");
@@ -100,12 +99,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sample_actions, menu);
@@ -121,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     private void addFlotingActionButton() {
