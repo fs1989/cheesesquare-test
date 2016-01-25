@@ -19,9 +19,13 @@
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo"></style>
 
     <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#673AB7</item>
-        <item name="colorPrimaryDark">#512DA8</item>
-        <item name="colorAccent">#FF4081</item>
+        <!--<item name="colorPrimary_old">#673AB7</item>-->
+        <!--<item name="colorPrimaryDark_old">#512DA8</item>-->
+        <!--<item name="colorAccent_old">#FF4081</item>-->
+
+        <item name="colorPrimary">#4CAD65</item>
+        <item name="colorPrimaryDark">#3D8A51</item>
+        <item name="colorAccent">#3F4348</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 

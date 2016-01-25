@@ -18,6 +18,7 @@ package com.support.android.designlibdemo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -52,11 +53,12 @@ public class CheeseDetailActivity extends AppCompatActivity {
     String time;
     String createAt;
 
-    SliderLayout sliderShow;
+    ImageView imageView;
+    int screenWidth;
+    int screenHight;
 
     public static int getScreenWidth(Context context) {
-        WindowManager manager = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = manager.getDefaultDisplay();
         return display.getWidth();
     }
@@ -76,29 +78,19 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         feedItem = (FeedItem) intent.getSerializableExtra("feedItem");
-        objectId = feedItem.getObjectId();
 
         getData();
 
-        sliderShow = (SliderLayout) findViewById(R.id.image);
-        sliderShow.stopAutoCycle();
+        imageView = (ImageView) findViewById(R.id.image);
 
-        DefaultSliderView textSliderView = new DefaultSliderView(this);
-        textSliderView
-                .description("Game of Thrones")
-                .image(image);
-
-        sliderShow.addSlider(textSliderView);
+        loadBackdrop();
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(feedItem.getTitle());
-
-//        loadBackdrop();
     }
 
     void getData() {
@@ -140,31 +132,23 @@ public class CheeseDetailActivity extends AppCompatActivity {
     }
 
     private void loadBackdrop() {
-        final ImageView imageView = (ImageView) findViewById(R.id.image);
+        Glide.with(this).load(image).crossFade(1500).into(imageView);
 
-        int screenWidth = getScreenWidth(this);
-        int screenHight = getScreenHeight(this);
+        screenWidth = getScreenWidth(this);
+        screenHight = getScreenHeight(this);
 
         ViewGroup.LayoutParams lp = imageView.getLayoutParams();
         lp.width = screenWidth;
-        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        lp.height = screenWidth;
+//        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         imageView.setLayoutParams(lp);
 
-        imageView.setMaxWidth(screenWidth);
-        imageView.setMaxHeight(screenHight);
 
-        Glide.with(this).load(image).crossFade().into(imageView);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
-    }
-
-    @Override
-    protected void onStop() {
-        sliderShow.stopAutoCycle();
-        super.onStop();
     }
 }

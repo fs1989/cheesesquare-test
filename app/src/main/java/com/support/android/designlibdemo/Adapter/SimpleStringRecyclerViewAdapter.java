@@ -79,7 +79,6 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
 
     @Override
     public int getItemCount() {
-        System.out.println("mdata size: " + mdata.size());
         return mdata.size();
     }
 
