@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.support.android.designlibdemo"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -36,11 +36,11 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
 
-    //以下SDK开发者请根据需要自行选择
-    //bmob-sdk ：Bmob的android sdk包
+    //锟斤拷锟斤拷SDK锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷锟斤拷选锟斤拷
+    //bmob-sdk 锟斤拷Bmob锟斤拷android sdk锟斤拷
     compile 'cn.bmob.android:bmob-sdk:3.4.5'
 
-    //okhttp（选填）：为解决弱网情况下SDK请求失败及响应慢的问题，自`V3.4.3版本`开始使用`okhttp`优化SDK的网络框架。
+    //okhttp锟斤拷选锟筋）锟斤拷为锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷SDK锟斤拷锟斤拷失锟杰硷拷锟斤拷应锟斤拷锟斤拷锟斤拷猓拷锟絗V3.4.3锟芥本`锟斤拷始使锟斤拷`okhttp`锟脚伙拷SDK锟斤拷锟斤拷锟斤拷锟杰★拷
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.4.0'
 }

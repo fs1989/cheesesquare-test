@@ -38,7 +38,7 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemLayout = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_item, viewGroup, false);
+                .inflate(R.layout.feed_item, viewGroup, false);
         itemLayout.setBackgroundResource(mBackground);
         return new ViewHolder(itemLayout);
     }

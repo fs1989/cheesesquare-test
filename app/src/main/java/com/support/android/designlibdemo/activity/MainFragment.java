@@ -34,7 +34,6 @@ import com.support.android.designlibdemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -56,7 +55,7 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        swipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.swipe_refresh_layout, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.feed_swipe_refresh_layout, container, false);
         swipeRefreshLayout.post(new Runnable() {
 
             @Override
