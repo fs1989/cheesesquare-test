@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.support.android.designlibdemo.Adapter.SimpleStringRecyclerViewAdapter;
+import com.support.android.designlibdemo.FeedItem;
+import com.support.android.designlibdemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +39,14 @@ import java.util.Random;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
-public class CheeseListFragment extends Fragment {
+public class MainFragment extends Fragment {
 
     private static final int STATE_REFRESH = 0;// 下拉刷新
     private static final int STATE_MORE = 1;// 加载更多
     List<FeedItem> bankCards = new ArrayList<FeedItem>();
     SwipeRefreshLayout swipeRefreshLayout;
     UltimateRecyclerView recyclerView;
-    String TAG = "CheeseListFragment";
+    String TAG = "MainFragment";
     boolean isLoadingMore;
     LinearLayoutManager mLayoutManager;
     SimpleStringRecyclerViewAdapter adapter;
@@ -88,6 +90,7 @@ public class CheeseListFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        // Load More
         recyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
@@ -104,15 +107,6 @@ public class CheeseListFragment extends Fragment {
         swipeRefreshLayout.setRefreshing(true);
         queryData(curPage, STATE_MORE);
 
-    }
-
-    private List<String> getRandomSublist(String[] array, int amount) {
-        ArrayList<String> list = new ArrayList<>(amount);
-        Random random = new Random();
-        while (list.size() < amount) {
-            list.add(array[random.nextInt(array.length)]);
-        }
-        return list;
     }
 
     private void queryData(final int page, final int actionType) {
@@ -159,8 +153,6 @@ public class CheeseListFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-
     }
 
     private void showToast(String msg) {

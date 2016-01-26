@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,6 +33,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.support.android.designlibdemo.Adapter.Adapter;
+import com.support.android.designlibdemo.R;
+import com.support.android.designlibdemo.activity.MainFragment;
 
 import cn.bmob.v3.Bmob;
 
@@ -81,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Category 1");
-        adapter.addFragment(new CheeseListFragment(), "Category 2");
+        adapter.addFragment(new MainFragment(), "Category 1");
+        adapter.addFragment(new MainFragment(), "Category 2");
         viewPager.setAdapter(adapter);
     }
 
@@ -121,8 +124,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

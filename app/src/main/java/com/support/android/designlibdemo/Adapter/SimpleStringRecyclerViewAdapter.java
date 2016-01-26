@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.support.android.designlibdemo.CheeseDetailActivity;
+import com.support.android.designlibdemo.activity.DetailActivity;
 import com.support.android.designlibdemo.FeedItem;
 import com.support.android.designlibdemo.R;
 
@@ -63,7 +63,7 @@ public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<Simple
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, CheeseDetailActivity.class);
+                Intent intent = new Intent(context, DetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("feedItem", mdata.get(position));
                 intent.putExtras(bundle);

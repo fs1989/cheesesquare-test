@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,11 +32,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.support.android.designlibdemo.FeedItem;
+import com.support.android.designlibdemo.R;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.GetListener;
 
-public class CheeseDetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     FeedItem feedItem;
 
@@ -80,9 +82,7 @@ public class CheeseDetailActivity extends AppCompatActivity {
         feedItem = (FeedItem) intent.getSerializableExtra("feedItem");
 
         getData();
-
         imageView = (ImageView) findViewById(R.id.image);
-
         loadBackdrop();
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,6 +107,26 @@ public class CheeseDetailActivity extends AppCompatActivity {
         createAt = feedItem.getCreatedAt();
     }
 
+
+    private void loadBackdrop() {
+        Glide.with(this).load(image).crossFade(1500).into(imageView);
+
+        screenWidth = getScreenWidth(this);
+        screenHight = getScreenHeight(this);
+
+        ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+        lp.width = screenWidth;
+        lp.height = screenWidth;
+//        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        imageView.setLayoutParams(lp);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sample_actions, menu);
+        return true;
+    }
+
     void getDataFromInternet() {
         BmobQuery<FeedItem> bmobQuery = new BmobQuery<FeedItem>();
         bmobQuery.getObject(this, objectId, new GetListener<FeedItem>() {
@@ -129,26 +149,5 @@ public class CheeseDetailActivity extends AppCompatActivity {
 //                toast("查询失败：" + msg);
             }
         });
-    }
-
-    private void loadBackdrop() {
-        Glide.with(this).load(image).crossFade(1500).into(imageView);
-
-        screenWidth = getScreenWidth(this);
-        screenHight = getScreenHeight(this);
-
-        ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-        lp.width = screenWidth;
-        lp.height = screenWidth;
-//        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        imageView.setLayoutParams(lp);
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sample_actions, menu);
-        return true;
     }
 }
