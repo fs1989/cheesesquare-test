@@ -25,11 +25,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.support.android.designlibdemo.FeedItem;
@@ -45,6 +49,7 @@ public class DetailActivity extends AppCompatActivity {
     String objectId;
     Integer id;
     Integer likes;
+    Integer views;
     String title;
     String brand;
     String price;
@@ -56,6 +61,13 @@ public class DetailActivity extends AppCompatActivity {
     String createAt;
 
     ImageView imageView;
+    TextView textView_title;
+    TextView textView_desc;
+    Button like_count;
+    Button view_count;
+    Button share;
+
+
     int screenWidth;
     int screenHight;
 
@@ -82,20 +94,24 @@ public class DetailActivity extends AppCompatActivity {
         feedItem = (FeedItem) intent.getSerializableExtra("feedItem");
 
         getData();
-        imageView = (ImageView) findViewById(R.id.image);
+        initView();
+        bindData();
         loadBackdrop();
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(feedItem.getTitle());
+//        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbar.setTitleEnabled(false);
+//        collapsingToolbar.setTitle(feedItem.getTitle());
     }
+
 
     void getData() {
         id = feedItem.getId();
         likes = feedItem.getLikes();
+        views = feedItem.getViews();
         title = feedItem.getTitle();
         brand = feedItem.getBrand();
         price = feedItem.getPrice();
@@ -106,6 +122,24 @@ public class DetailActivity extends AppCompatActivity {
         time = feedItem.getTime();
         createAt = feedItem.getCreatedAt();
     }
+
+    private void initView() {
+        imageView = (ImageView) findViewById(R.id.image);
+        textView_title = (TextView) findViewById(R.id.title);
+        textView_desc = (TextView) findViewById(R.id.desc);
+        like_count = (Button) findViewById(R.id.like_count);
+        view_count = (Button) findViewById(R.id.like_count);
+        share = (Button) findViewById(R.id.share_action);
+    }
+
+    private void bindData() {
+        textView_title.setText(title);
+        textView_desc.setText(desc);
+        like_count.setText(likes.toString());
+        view_count.setText(views.toString());
+    }
+
+
 
 
     private void loadBackdrop() {

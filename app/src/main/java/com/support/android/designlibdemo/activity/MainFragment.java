@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.support.android.designlibdemo.Adapter.SimpleStringRecyclerViewAdapter;
+import com.support.android.designlibdemo.Adapter.FeedAdapter;
 import com.support.android.designlibdemo.FeedItem;
 import com.support.android.designlibdemo.R;
 
@@ -48,7 +48,7 @@ public class MainFragment extends Fragment {
     String TAG = "MainFragment";
     boolean isLoadingMore;
     LinearLayoutManager mLayoutManager;
-    SimpleStringRecyclerViewAdapter adapter;
+    FeedAdapter adapter;
     private int limit = 5;        // 每页的数据是10条
     private int curPage = 0;        // 当前页的编号，从0开始
 
@@ -85,7 +85,7 @@ public class MainFragment extends Fragment {
         recyclerView.enableLoadmore();
 
         queryData(0, STATE_REFRESH);
-        adapter = new SimpleStringRecyclerViewAdapter(getActivity(), bankCards);
+        adapter = new FeedAdapter(getActivity(), bankCards);
 
         recyclerView.setAdapter(adapter);
 

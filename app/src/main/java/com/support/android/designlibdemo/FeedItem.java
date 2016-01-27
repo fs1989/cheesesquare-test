@@ -9,6 +9,7 @@ public class FeedItem extends BmobObject {
 
     Integer id;
     Integer likes;
+    Integer views;
     String title;
     String brand;
     String price;
@@ -32,6 +33,14 @@ public class FeedItem extends BmobObject {
 
     public Integer getLikes() {
         return likes;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
     }
 
     public void setLikes(Integer likes) {

@@ -23,13 +23,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Dan on 2016-01-15.
  */
-public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     private final TypedValue mTypedValue = new TypedValue();
     private int mBackground;
     private List<FeedItem> mdata;
 
-    public SimpleStringRecyclerViewAdapter(Context context, List<FeedItem> items) {
+    public FeedAdapter(Context context, List<FeedItem> items) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
         mdata = items;
