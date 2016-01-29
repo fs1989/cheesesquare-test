@@ -1,4 +1,4 @@
-package com.support.android.designlibdemo.Adapter;
+package com.support.android.designlibdemo.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

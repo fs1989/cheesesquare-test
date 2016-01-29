@@ -32,9 +32,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.support.android.designlibdemo.Adapter.Adapter;
+import com.support.android.designlibdemo.adapter.Adapter;
 import com.support.android.designlibdemo.R;
-import com.support.android.designlibdemo.activity.MainFragment;
+import com.support.android.designlibdemo.fragment.MainFragment;
 
 import cn.bmob.v3.Bmob;
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);
+
         }
 
         // Tab Layout
@@ -84,9 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new MainFragment(), "Category 1");
-        adapter.addFragment(new MainFragment(), "Category 2");
+        adapter.addFragment(new MainFragment(), "朋友");
+        adapter.addFragment(new MainFragment(), "主页");
+        adapter.addFragment(new MainFragment(), "我的");
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

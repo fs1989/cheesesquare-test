@@ -1,4 +1,4 @@
-package com.support.android.designlibdemo.Adapter;
+package com.support.android.designlibdemo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.support.android.designlibdemo.activity.DetailActivity;
-import com.support.android.designlibdemo.FeedItem;
+import com.support.android.designlibdemo.bmob.FeedItem;
 import com.support.android.designlibdemo.R;
 
 import java.util.List;
@@ -70,11 +70,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         });
-
-//        Glide.with(holder.mImageView.getContext())
-//                .load(Cheeses.getRandomCheeseDrawable())
-//                .fitCenter()
-//                .into(holder.mImageView);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.bmob;
 
 import cn.bmob.v3.BmobObject;
 
