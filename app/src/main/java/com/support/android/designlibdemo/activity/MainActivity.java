@@ -32,9 +32,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.support.android.designlibdemo.adapter.Adapter;
 import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.fragment.MainFragment;
+import com.support.android.designlibdemo.fragment.MyProfileFragment;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import cn.bmob.v3.Bmob;
 
@@ -45,14 +47,24 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
+    //微信 SDK
+    private static final String APP_ID = "";
+    private IWXAPI api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Bmob SDK
         Bmob.initialize(this, "02c7c284a874541120575b2d2e839059");
+
+        // 微信 SDK
+
+
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         // ActionBar
@@ -60,17 +72,23 @@ public class MainActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout)
+
+                findViewById(R.id.drawer_layout);
 
         // NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
+        if (navigationView != null)
+
+        {
             setupDrawerContent(navigationView);
         }
 
         // ViewPager
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        if (viewPager != null) {
+        if (viewPager != null)
+
+        {
             setupViewPager(viewPager);
 
         }
@@ -80,14 +98,20 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         addFlotingActionButton();
+
+    }
+
+    private void regToWx() {
+        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+        api.registerApp(APP_ID);
     }
 
 
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
+        com.support.android.designlibdemo.adapter.MainFragmentAdapter adapter = new com.support.android.designlibdemo.adapter.MainFragmentAdapter(getSupportFragmentManager());
         adapter.addFragment(new MainFragment(), "朋友");
         adapter.addFragment(new MainFragment(), "主页");
-        adapter.addFragment(new MainFragment(), "我的");
+        adapter.addFragment(new MyProfileFragment(), "我的");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
     }
@@ -129,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivityOLD.class);
                 startActivity(intent);
             }
         });
